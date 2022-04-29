@@ -4,10 +4,20 @@ const myLibrary = JSON.parse(localStorage.getItem('library')) || [];
 const cardsContainer = document.querySelector('main')
 const addBookButton = document.querySelector('.newBook') 
 const form = document.querySelector('form')
-
+const bookCounter = document.querySelector('.book-counter')
+const remainingCounter = document.querySelector('.books-read')
+const completed = document.querySelector('.books-readed')
+const toggleButton = document.querySelector('.add-button-mobile')
 //Submitting form event listener
 form.addEventListener('submit', validateForm)
-
+toggleButton.addEventListener('click',()=>{
+    document.querySelector('.form').classList.toggle('active')
+    toggleButton.classList.toggle('active')
+})
+addBookButton.addEventListener('click',()=>{
+    document.querySelector('.form').classList.toggle('active')
+    toggleButton.classList.toggle('active')
+})
 //Object constructor
 function Book(title,author,pages,status,color){
     this.title = title;
@@ -153,6 +163,13 @@ function deleteEntry(event){
     //Save changes on the local storage
     localStorage.setItem('library', JSON.stringify(myLibrary));
 }
+setInterval(()=>{
+    bookCounter.textContent = `Books on Library: ${myLibrary.length}`
 
+    let booksLeft = myLibrary.filter(book => !book.status).length
+    remainingCounter.textContent = `Books left to read: ${booksLeft}`;
+
+    completed.textContent = `Completed: ${myLibrary.length - booksLeft}`
+})
 
 document.addEventListener('DOMContentLoaded', populateLibrary)

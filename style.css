@@ -3,26 +3,74 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Helvetica';
+    font-family: 'Roboto';
 }
+
 body{
     height: 100vh;
     --background: rgb(37, 41, 122);
     --colorText: rgb(255, 255, 255);
     overflow: auto;
 }
+.add-button-mobile{
+    border-radius: 5px;
+    width: 50%;
+    margin: 10px auto 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(81, 72, 72);
+    display: none;
+}
+.add-button-mobile svg{
+    transition: 500ms;
+}
 .side-bar{
     grid-row: 1/3;
-    border-right: 1px solid rgb(187, 187, 187);
+    border-right: 2px solid rgb(187, 187, 187);
     padding: 30px;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 10px;
+    z-index: 1;
 }
 header{
-
+    border-bottom: 2px solid rgb(187, 187, 187);
+    display: flex;
+    padding: 20px;
+    font-size:  1.5rem ;
+    color: rgb(81, 72, 72);
+    z-index: 1;
+    font-weight: 600;
+    justify-content: center;
+    align-items: center;
+}
+.books-read{
+    position: relative;
+    /* solid rgb(81,72,72) */
+}
+.books-read::after{
+    content: '';
+    top: -2px;
+    position: absolute;
+    height: 110%;
+    width: 3px ;
+    background-color:rgb(81,72,72);
+}
+.books-read::before{
+    content: '';
+    right: 0;
+    top: -2px;
+    position: absolute;
+    height: 110%;
+    width: 3px ;
+    background-color:rgb(81,72,72);
+}
+header > *{
+    text-align: center;
+    flex: 1;
 }
 .main-container{
     height: 100%;
@@ -63,6 +111,7 @@ header{
     font-size: 2.5rem;
     display: flex;
     justify-content: center;
+    width: min-content;
 }
 h1{
     padding-top: 20px;
@@ -72,12 +121,12 @@ h1{
     font-size: 1.7rem;
 }
 main{
-    background-image: url('https://img.freepik.com/free-vector/white-gray-background-with-diagonal-lines-pattern_1017-25100.jpg?w=2000');
+    overflow: auto;
+    background-image: url('https://i.pinimg.com/originals/92/0c/d0/920cd0a52ca80ae951bf392a3a0e154d.jpg');
+    background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 100% 100%;
     padding: 30px;
-    justify-content: center;
-    align-content: center;
     display: grid;
     gap: 50px;
     grid-template-columns: repeat(auto-fit, 250px);
@@ -216,11 +265,11 @@ h2:nth-child(4)::before{
 
 }
 .form{
-    border-radius: 10px;
     font-size: 1.2rem;
     flex: 1;
     display: flex;
     align-items: center;
+    transition: 1s;
 }
 label{
     color: rgb(65, 65, 65);
@@ -279,6 +328,9 @@ input:focus{
 .color-box input{
     display: none;
 }
+.color-box label:hover{
+    background-color: rgba(83, 83, 83, 0.116);
+}
 
 input:checked ~ label {
     border: 1px solid var(--background);
@@ -286,13 +338,14 @@ input:checked ~ label {
     color: var(--background);
 }
 .color-box label{
-    border: 1px solid gray;
+    border: 1px solid rgba(128, 128, 128, 0.715);
     padding: 10px;
     border-radius: 5px;
     font-size: 1.5rem;
     background-color: white;
-    box-shadow: 1px 1px 5px gray ;
+    box-shadow: 1px 1px 5px rgba(128, 128, 128, 0.712) ;
     cursor: pointer;
+    transition: 300ms;
 }
 .form button{
     background-color: rgba(255, 255, 255, 0);
@@ -360,4 +413,52 @@ input:checked ~ label {
     background-color: #fd5e5e;
     color: #ffffff;
     transform: scale(1.05);
+}
+@media (max-width:990px) {
+    .main-container{
+        display: flex;
+        flex-direction: column;
+    }
+    .add-button-mobile{
+        display: flex;
+    }
+    .logo{
+        width: auto;
+    }
+    header{
+        padding-top: 0;
+        font-size: 1rem;
+    }
+    .side-bar{
+        border: none;
+        display: block;
+        padding: 10px;
+    }
+    main{
+        grid-template-columns: repeat(auto-fit, 200px);
+        grid-auto-rows: 250px;
+    }
+    form{
+        padding: 10px;
+    }
+    .form{
+        max-height: 0px;
+        overflow: hidden;
+        flex: 0;
+        transition: 500ms;
+    }
+    .options button{
+        font-size: 1rem;
+        padding: 4px 8px;
+    }
+    main{
+        flex: 1;
+        justify-content: center;
+    }
+}
+.active{
+    max-height: 1000px;
+}
+.active.add-button-mobile svg:nth-child(1){
+    transform: rotateZ(135deg);
 }
