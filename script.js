@@ -19,16 +19,16 @@ addBookButton.addEventListener('click',()=>{
     toggleButton.classList.toggle('active')
 })
 //Object constructor
-function Book(title,author,pages,status,color){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.status = status;
-    this.color = color
+class Book{
+    constructor(title,author,pages,status,color){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.status = status;
+        this.color = color
+    }
 }
-Book.prototype.info = function(){
-    `${this.title} by ${this.author}, ${this.pages} pages, ${this.status}`
-}
+
 
 function addBookToLibrary(title='Missing Info',author = 'Missing Info',pages ='Missing Info',status = false,color) {
     // Creates new Book object and appends its to the library array
